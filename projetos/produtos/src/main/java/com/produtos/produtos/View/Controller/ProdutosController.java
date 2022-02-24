@@ -56,7 +56,7 @@ public class ProdutosController {
             .collect(Collectors.toList());
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
-    }
+    }//nois
 
     @DeleteMapping("/{id}")
     public ResponseEntity deletarProduto(@PathVariable String id){
