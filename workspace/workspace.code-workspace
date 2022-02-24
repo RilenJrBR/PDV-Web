@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "eureka",
+			"path": "..\\projetos\\eureka"
+		}
+	],
+	"settings": {}
+}
