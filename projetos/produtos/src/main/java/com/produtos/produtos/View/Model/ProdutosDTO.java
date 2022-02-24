@@ -1,19 +1,20 @@
-package com.produtos.produtos.Model;
+package com.produtos.produtos.View.Model;
 
-import com.produtos.produtos.View.Model.ProdutosDTO;
+import javax.validation.constraints.NotBlank;
+
+import com.produtos.produtos.Model.Produtos;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("produtos")
-public class Produtos {
+public class ProdutosDTO {
     @Id
+    @NotBlank(message = "Voce deve prencher o id!!")
     private String id;
     private String nome;
     private int quantEstoque;
     private float valorUn;
     
-    public Produtos(String nome, int quantEstoque, float valorUn) {
+    public ProdutosDTO(String nome, int quantEstoque, float valorUn) {
         this.nome = nome;
         this.quantEstoque = quantEstoque;
         this.valorUn = valorUn;
@@ -41,9 +42,9 @@ public class Produtos {
     }
     public void setValorUn(float valorUn) {
         this.valorUn = valorUn;
-    }        
-
-    public static Produtos from(ProdutosDTO dto) {
-        return new Produtos(dto.getNome(), dto.getQuantEstoque(), dto.getValorUn());
+    }    
+    
+    public static ProdutosDTO from(Produtos produto) {
+        return new ProdutosDTO(produto.getNome(), produto.getQuantEstoque(), produto.getValorUn());
     }
 }

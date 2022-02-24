@@ -1,5 +1,6 @@
 package com.produtos.produtos.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.produtos.produtos.Model.Produtos;
@@ -22,4 +23,14 @@ public class ProdutosServiceImpl implements ProdutosService{
     public Optional<Produtos> get(String id) {
         return repositorio.findById(id);
     }   
+
+    @Override
+    public List<Produtos> obterTodasProdutos(){
+        return repositorio.findAll();
+    }
+
+    @Override
+    public void deletarProduto(String id){
+        repositorio.deleteById(id);
+    }
 }
