@@ -76,7 +76,7 @@ public class ProdutosController {
         }
 
         Produtos produto = optinal.get();
-        produto.setQuantEstoque(produto.getQuantEstoque());
+        produto.setEstoque(produto.getEstoque());
         produto = servico.add(produto);
 
         return new ResponseEntity<>(ProdutosDTO.from(produto), HttpStatus.OK);

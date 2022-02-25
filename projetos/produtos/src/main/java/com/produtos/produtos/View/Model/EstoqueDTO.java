@@ -8,18 +8,18 @@ public class EstoqueDTO {
     @Id
     @NotBlank(message = "Voce deve prencher o id!!")
     private String id;
-    private int quantEstoque;
+    private int estoque;
 
-    public EstoqueDTO(int quantEstoque) {
-        this.quantEstoque = quantEstoque;
+    public EstoqueDTO(int estoque) {
+        this.estoque = estoque;
     }
 
-    public int getQuantEstoque() {
-        return quantEstoque;
+    public int getEstoque() {
+        return estoque;
     }
 
-    public void setQuantEstoque(int quantEstoque) {
-        this.quantEstoque = quantEstoque;
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
     }
 
     public String getId() {
@@ -30,6 +30,6 @@ public class EstoqueDTO {
         this.id = id;
     }   
     public static EstoqueDTO from(ProdutosDTO produto) {
-        return new EstoqueDTO(produto.getQuantEstoque());
+        return new EstoqueDTO(produto.getEstoque());
     } 
 }

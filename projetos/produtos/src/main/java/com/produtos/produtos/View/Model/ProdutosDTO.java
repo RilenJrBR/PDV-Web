@@ -11,13 +11,13 @@ public class ProdutosDTO {
     private String id;
     private String nome;
     @NotBlank(message = "Voce deve prencher a quantidade em estoque!!")
-    private int quantEstoque;
-    private float valorUn;
+    private int estoque;
+    private float valor;
     
-    public ProdutosDTO(String nome, int quantEstoque, float valorUn) {
+    public ProdutosDTO(String nome, int estoque, float valor) {
         this.nome = nome;
-        this.quantEstoque = quantEstoque;
-        this.valorUn = valorUn;
+        this.estoque = estoque;
+        this.valor = valor;
     }
     public String getId() {
         return id;
@@ -31,20 +31,20 @@ public class ProdutosDTO {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public int getQuantEstoque() {
-        return quantEstoque;
+    public int getEstoque() {
+        return estoque;
     }
-    public void setQuantEstoque(int quantEstoque) {
-        this.quantEstoque = quantEstoque;
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
     }
-    public float getValorUn() {
-        return valorUn;
+    public float getValor() {
+        return valor;
     }
-    public void setValorUn(float valorUn) {
-        this.valorUn = valorUn;
+    public void setValor(float valor) {
+        this.valor = valor;
     }    
     
     public static ProdutosDTO from(Produtos produto) {
-        return new ProdutosDTO(produto.getNome(), produto.getQuantEstoque(), produto.getValorUn());
+        return new ProdutosDTO(produto.getNome(), produto.getEstoque(), produto.getValor());
     }
 }

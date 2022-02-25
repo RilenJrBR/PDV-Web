@@ -10,13 +10,13 @@ public class Produtos {
     @Id
     private String id;
     private String nome;
-    private int quantEstoque;
-    private float valorUn;
+    private int estoque;
+    private float valor;
     
-    public Produtos(String nome, int quantEstoque, float valorUn) {
+    public Produtos(String nome, int estoque, float valor) {
         this.nome = nome;
-        this.quantEstoque = quantEstoque;
-        this.valorUn = valorUn;
+        this.estoque = estoque;
+        this.valor = valor;
     }
     public String getId() {
         return id;
@@ -30,20 +30,20 @@ public class Produtos {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public int getQuantEstoque() {
-        return quantEstoque;
+    public int getEstoque() {
+        return estoque;
     }
-    public void setQuantEstoque(int quantEstoque) {
-        this.quantEstoque = quantEstoque;
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
     }
-    public float getValorUn() {
-        return valorUn;
+    public float getValor() {
+        return valor;
     }
-    public void setValorUn(float valorUn) {
-        this.valorUn = valorUn;
+    public void setValor(float valor) {
+        this.valor = valor;
     }        
 
     public static Produtos from(ProdutosDTO dto) {
-        return new Produtos(dto.getNome(), dto.getQuantEstoque(), dto.getValorUn());
+        return new Produtos(dto.getNome(), dto.getEstoque(), dto.getValor());
     }
 }
