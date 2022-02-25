@@ -36,13 +36,13 @@ public class ProdutosController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProdutosDTO> obterPorId(@PathVariable String id) {
-        Optional<Produtos> carro = servico.get(id);
+        Optional<Produtos> produto = servico.get(id);
 
-        if (carro.isEmpty()) {
+        if (produto.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(ProdutosDTO.from(carro.get()), HttpStatus.OK);
+        return new ResponseEntity<>(ProdutosDTO.from(produto.get()), HttpStatus.OK);
     }
 
     @GetMapping
