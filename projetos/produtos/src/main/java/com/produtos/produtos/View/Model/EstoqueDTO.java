@@ -1,9 +1,12 @@
 package com.produtos.produtos.View.Model;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id;
 
 public class EstoqueDTO {
     @Id
+    @NotBlank(message = "Voce deve prencher o id!!")
     private String id;
     private int quantEstoque;
 
