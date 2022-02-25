@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import com.produtos.produtos.Model.Produtos;
 import com.produtos.produtos.Service.ProdutosService;
+import com.produtos.produtos.View.Model.EstoqueDTO;
 import com.produtos.produtos.View.Model.ProdutosDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,5 +64,21 @@ public class ProdutosController {
     public ResponseEntity deletarProduto(@PathVariable String id){
         servico.deletarProduto(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<ProdutosDTO> atualizarEstoque(@RequestBody @Valid EstoqueDTO dto, String id){
+
+        Optional<Produtos> optinal = servico.get(id);
+
+        if (optinal.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Produtos produto = optinal.get();
+        produto.setQuantEstoque(produto.getQuantEstoque());
+        produto = servico.add(produto);
+
+        return new ResponseEntity<>(ProdutosDTO.from(produto), HttpStatus.OK);
     }
 }
