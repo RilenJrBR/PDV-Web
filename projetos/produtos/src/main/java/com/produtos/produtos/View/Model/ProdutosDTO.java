@@ -8,9 +8,9 @@ import org.springframework.data.annotation.Id;
 
 public class ProdutosDTO {
     @Id
-    @NotBlank(message = "Voce deve prencher o id!!")
     private String id;
     private String nome;
+    @NotBlank(message = "Voce deve prencher a quantidade em estoque!!")
     private int quantEstoque;
     private float valorUn;
     

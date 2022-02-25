@@ -33,4 +33,9 @@ public class ProdutosServiceImpl implements ProdutosService{
     public void deletarProduto(String id){
         repositorio.deleteById(id);
     }
+
+    @Override
+    public Optional<Produtos> atualizarEstoque(String id){
+        return repositorio.findById(id);
+    }
 }
