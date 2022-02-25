@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 public class VendasDTO {
     @Id
     private String id;
-    @NotBlank(message = "Você deve preencher com um codigo de produto valido!")
+    @NotBlank(message = "Você deve preencher com um código de produto válido!")
     private String produto;
     private int quantProdutos;
     private float valorUn;
