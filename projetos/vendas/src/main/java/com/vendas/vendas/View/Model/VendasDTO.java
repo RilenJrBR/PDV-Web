@@ -1,21 +1,21 @@
-package com.vendas.vendas.Model;
+package com.vendas.vendas.View.Model;
 
-import com.vendas.vendas.View.Model.VendasDTO;
+import javax.validation.constraints.NotBlank;
+
+import com.vendas.vendas.Model.Vendas;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("vendas")
-public class Vendas {
+public class VendasDTO {
     @Id
+    @NotBlank(message = "Você deve preencher o ID!")
     private String id;
     private String produto;
     private int quantProdutos;
     private float valorUn;
     private float valorTotal;
-
     
-    public Vendas(String produto, int quantProdutos, float valorUn, float valorTotal) {
+    public VendasDTO(String produto, int quantProdutos, float valorUn, float valorTotal) {
         this.produto = produto;
         this.quantProdutos = quantProdutos;
         this.valorUn = valorUn;
@@ -53,17 +53,17 @@ public class Vendas {
     public void setValorUn(float valorUn) {
         this.valorUn = valorUn;
     }
-    
+
     public float getValorTotal() {
         return valorTotal;
     }
-    
+
     public void setValorTotal(float valorTotal) {
         this.valorTotal = valorTotal;
-    }  
-    
-    public static Vendas from(VendasDTO dto){
-        return new Vendas(dto.getProduto(), dto.getQuantProdutos(), dto.getValorUn(), 
-        dto.getValorTotal());
+    }
+
+    public static VendasDTO from(Vendas venda){
+        return new VendasDTO(venda.getProduto(), venda.getQuantProdutos(), venda.getValorUn(), 
+        venda.getValorTotal());
     }
 }

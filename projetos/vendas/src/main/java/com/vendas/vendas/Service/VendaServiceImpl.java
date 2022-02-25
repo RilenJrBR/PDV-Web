@@ -1,5 +1,6 @@
 package com.vendas.vendas.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.vendas.vendas.Model.Vendas;
@@ -22,5 +23,15 @@ public class VendaServiceImpl implements VendaService {
     @Override
     public Optional<Vendas> get(String id){
         return repositorio.findById(id);
+    }
+
+    @Override
+    public List<Vendas> obterTodasVendas(){
+        return repositorio.findAll();
+    }
+
+    @Override
+    public void deletarVenda(String id){
+        repositorio.deleteById(id);
     }
 }

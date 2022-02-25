@@ -1,9 +1,14 @@
 package com.vendas.vendas.View.Controller;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import com.vendas.vendas.Model.Vendas;
 import com.vendas.vendas.Service.VendaService;
+import com.vendas.vendas.View.Model.VendasDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,15 +29,33 @@ public class VendasController {
     private VendaService servico;
 
     @PostMapping
-    public ResponseEntity<Vendas> criarVenda(@RequestBody Vendas venda){
-        Vendas vendaCriada = servico.salvar(venda);
-        return new ResponseEntity<>(venda, HttpStatus.OK);
+    public ResponseEntity<VendasDTO> criarVenda(@RequestBody @Valid VendasDTO dto){
+        Vendas venda = Vendas.from(dto);
+        venda = servico.add(venda);
+        return new ResponseEntity<>(VendasDTO.from(venda), HttpStatus.CREATED);
+    }
+
+    @GetMapping ("/{id}")
+    public ResponseEntity<VendasDTO> obterPorId(@PathVariable String id){
+        Optional<Vendas> venda = servico.get(id);
+        if (venda.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity<>(VendasDTO.from(venda.get()), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Vendas>> obterVendas(){
-        List<Vendas> venda = servico.obterVendas();
-        return new ResponseEntity<>(venda, HttpStatus.OK);
+    public ResponseEntity<List<VendasDTO>> obterTodasVendas(@RequestBody VendasDTO dto){
+        List<Vendas> venda = servico.obterTodasVendas();
+
+        List<VendasDTO> dtos = venda
+
+        .stream()
+        .map(VendasDTO::from)
+        .collect(Collectors.toList());
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
