@@ -2,8 +2,6 @@ package com.produtos.produtos.View.Model;
 
 import javax.validation.constraints.NotBlank;
 
-import com.produtos.produtos.Model.Produtos;
-
 import org.springframework.data.annotation.Id;
 
 public class EstoqueDTO {
