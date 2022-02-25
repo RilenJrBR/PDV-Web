@@ -2,6 +2,8 @@ package com.produtos.produtos.View.Model;
 
 import javax.validation.constraints.NotBlank;
 
+import com.produtos.produtos.Model.Produtos;
+
 import org.springframework.data.annotation.Id;
 
 public class EstoqueDTO {
@@ -28,5 +30,8 @@ public class EstoqueDTO {
 
     public void setId(String id) {
         this.id = id;
-    }    
+    }   
+    public static EstoqueDTO from(ProdutosDTO produto) {
+        return new EstoqueDTO(produto.getQuantEstoque());
+    } 
 }

@@ -10,5 +10,4 @@ public interface ProdutosService {
     Optional<Produtos> get(String id);
     List<Produtos> obterTodasProdutos();
     void deletarProduto(String id);
-    Optional<Produtos> atualizarEstoque(String id);
 }
