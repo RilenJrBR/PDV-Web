@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 @RequestMapping("/api/produtos")
+@RestController
 public class ProdutosController {
     @Autowired
     private ProdutosService servico;
@@ -32,8 +32,9 @@ public class ProdutosController {
     @PostMapping
     public ResponseEntity<ProdutosDTO> cadastrar(@RequestBody @Valid ProdutosDTO dto) {
         Produtos produto = Produtos.from(dto);
-        produto = servico.add(produto);
-        return new ResponseEntity<>(ProdutosDTO.from(produto), HttpStatus.CREATED);
+        servico.add(produto);
+        ProdutosDTO salvar = ProdutosDTO.from(produto);
+        return new ResponseEntity<>(salvar, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

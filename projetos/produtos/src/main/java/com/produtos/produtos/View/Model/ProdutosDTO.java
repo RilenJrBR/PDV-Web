@@ -5,16 +5,18 @@ import javax.validation.constraints.NotBlank;
 import com.produtos.produtos.Model.Produtos;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class ProdutosDTO {
     @Id
     private String id;
     private String nome;
     @NotBlank(message = "Voce deve prencher a quantidade em estoque!!")
-    private int estoque;
+    private Integer estoque;
     private float valor;
     
-    public ProdutosDTO(String nome, int estoque, float valor) {
+    public ProdutosDTO(String nome, Integer estoque, float valor) {
         this.nome = nome;
         this.estoque = estoque;
         this.valor = valor;
@@ -31,10 +33,10 @@ public class ProdutosDTO {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public int getEstoque() {
+    public Integer getEstoque() {
         return estoque;
     }
-    public void setEstoque(int estoque) {
+    public void setEstoque(Integer estoque) {
         this.estoque = estoque;
     }
     public float getValor() {

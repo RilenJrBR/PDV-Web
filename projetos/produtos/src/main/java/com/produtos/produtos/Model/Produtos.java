@@ -10,10 +10,10 @@ public class Produtos {
     @Id
     private String id;
     private String nome;
-    private int estoque;
+    private Integer estoque;
     private float valor;
     
-    public Produtos(String nome, int estoque, float valor) {
+    public Produtos(String nome, Integer estoque, float valor) {
         this.nome = nome;
         this.estoque = estoque;
         this.valor = valor;
@@ -30,10 +30,10 @@ public class Produtos {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public int getEstoque() {
+    public Integer getEstoque() {
         return estoque;
     }
-    public void setEstoque(int estoque) {
+    public void setEstoque(Integer estoque) {
         this.estoque = estoque;
     }
     public float getValor() {

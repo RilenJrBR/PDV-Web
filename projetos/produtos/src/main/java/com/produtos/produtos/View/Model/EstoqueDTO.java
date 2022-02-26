@@ -8,17 +8,17 @@ public class EstoqueDTO {
     @Id
     @NotBlank(message = "Voce deve prencher o id!!")
     private String id;
-    private int estoque;
+    private Integer estoque;
 
-    public EstoqueDTO(int estoque) {
+    public EstoqueDTO(Integer estoque) {
         this.estoque = estoque;
     }
 
-    public int getEstoque() {
+    public Integer getEstoque() {
         return estoque;
     }
 
-    public void setEstoque(int estoque) {
+    public void setEstoque(Integer estoque) {
         this.estoque = estoque;
     }
 
