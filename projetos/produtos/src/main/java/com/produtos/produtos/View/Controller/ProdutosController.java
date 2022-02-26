@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/api/cad")
 @RestController
+@RequestMapping("api/cad")
 public class ProdutosController {
     @Autowired
     private ProdutosService servico;
 
     @PostMapping
-    public ResponseEntity<ProdutosDTO> cadastrar(@RequestBody @Valid ProdutosDTO dto) {
+    public ResponseEntity<ProdutosDTO> cadastrar(@RequestBody ProdutosDTO dto) {
         Produtos produto = Produtos.from(dto);
         servico.add(produto);
         ProdutosDTO salvar = ProdutosDTO.from(produto);
