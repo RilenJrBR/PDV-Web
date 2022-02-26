@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 
 public class EstoqueDTO {
     @Id
-    @NotBlank(message = "Voce deve prencher o id!!")
+    //@NotBlank(message = "Voce deve prencher o id!!")
     private String id;
     private Integer estoque;
 

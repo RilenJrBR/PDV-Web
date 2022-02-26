@@ -12,7 +12,7 @@ public class ProdutosDTO {
     @Id
     private String id;
     private String nome;
-    @NotBlank(message = "Voce deve prencher a quantidade em estoque!!")
+    //@NotBlank(message = "Voce deve prencher a quantidade em estoque!!")
     private Integer estoque;
     private float valor;
     
