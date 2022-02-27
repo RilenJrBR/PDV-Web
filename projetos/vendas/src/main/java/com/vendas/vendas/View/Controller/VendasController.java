@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import com.vendas.vendas.Model.Vendas;
 import com.vendas.vendas.Service.VendaService;
-import com.vendas.vendas.View.Model.VendasDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import feign.FeignException.FeignClientException;
+
 @RestController
 @RequestMapping("api/vendas")
 public class VendasController {
@@ -28,25 +29,45 @@ public class VendasController {
     @Autowired
     private VendaService servico;
 
+    @Autowired
+    private VendaFeignClient vendaFeignClient;
+
     @PostMapping
-    public ResponseEntity<VendasDTO> criarVenda(@RequestBody @Valid VendasDTO dto){
-        Vendas venda = Vendas.from(dto);
-        venda = servico.add(venda);
-        return new ResponseEntity<>(VendasDTO.from(venda), HttpStatus.CREATED);
+    public ResponseEntity<Object> post(@RequestBody Vendas venda) {
+        List<String> vendaId = venda.getProduto();
+
+        for (String id : vendaId) {
+            try {
+                if (vendaFeignClient.obterPorId(id) == null) {
+                    return new ResponseEntity<>("Não é possível validar os este produto.", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+            catch (FeignClientException e) {
+                if (e.status() == 404) {
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                }
+                else {
+                    throw e;
+                }                
+            }
+        }
+
+        Vendas vendaEfetuado = servico.add(venda);
+        return new ResponseEntity<>(vendaEfetuado, HttpStatus.CREATED);
     }
 
     @GetMapping ("/{id}")
-    public ResponseEntity<VendasDTO> obterPorId(@PathVariable String id){
+    public ResponseEntity<Vendas> obterPorId(@PathVariable String id){
         Optional<Vendas> venda = servico.get(id);
         if (venda.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         
-        return new ResponseEntity<>(VendasDTO.from(venda.get()), HttpStatus.OK);
+        return new ResponseEntity<>(Vendas.from(venda.get()), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<VendasDTO>> obterTodasVendas(@RequestBody VendasDTO dto){
+    public ResponseEntity<List<Vendas>> obterTodasVendas(@RequestBody Vendas dto){
         List<Vendas> venda = servico.obterTodasVendas();
 
         List<VendasDTO> dtos = venda
@@ -56,11 +77,5 @@ public class VendasController {
         .collect(Collectors.toList());
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deletarVenda(@PathVariable String id){
-        servico.deletarVenda(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

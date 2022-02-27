@@ -29,9 +29,4 @@ public class VendaServiceImpl implements VendaService {
     public List<Vendas> obterTodasVendas(){
         return repositorio.findAll();
     }
-
-    @Override
-    public void deletarVenda(String id){
-        repositorio.deleteById(id);
-    }
 }

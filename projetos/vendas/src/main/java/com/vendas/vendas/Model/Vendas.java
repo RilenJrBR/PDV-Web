@@ -1,6 +1,6 @@
 package com.vendas.vendas.Model;
 
-import com.vendas.vendas.View.Model.VendasDTO;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,17 +9,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Vendas {
     @Id
     private String id;
-    private String produto;
+    private List<String> produto;
     private int quantProdutos;
     private float valorUn;
     private float valorTotal;
 
     
-    public Vendas(String produto, int quantProdutos, float valorUn, float valorTotal) {
-        this.produto = produto;
+    public Vendas(List<String> produto, int quantProdutos, float valorUn, float valorTotal) {
+        this.produto= produto;
         this.quantProdutos = quantProdutos;
         this.valorUn = valorUn;
         this.valorTotal = valorTotal;
+
     }
 
     public String getId() {
@@ -30,11 +31,11 @@ public class Vendas {
         this.id = id;
     }
 
-    public String getProduto() {
+    public List<String> getProduto() {
         return produto;
     }
 
-    public void setProduto(String produto) {
+    public void setProduto(List<String> produto) {
         this.produto = produto;
     }
 
@@ -62,8 +63,4 @@ public class Vendas {
         this.valorTotal = valorTotal;
     }  
     
-    public static Vendas from(VendasDTO dto){
-        return new Vendas(dto.getProduto(), dto.getQuantProdutos(), dto.getValorUn(), 
-        dto.getValorTotal());
-    }
 }

@@ -9,7 +9,6 @@ public interface VendaService{
     Vendas add(Vendas vendas);
     Optional <Vendas> get(String id);
     List<Vendas> obterTodasVendas();
-    void deletarVenda(String id);
 }
 
 
