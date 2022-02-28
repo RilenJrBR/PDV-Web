@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "produto", fallback = VendaFeignClientFallback.class)
 public interface VendaFeignClient {
     @GetMapping("/{id}")
-    ProdutoDTO obterPorId(@PathVariable("id") String id);
+    ResponseEntity<Object> obterPorId(@PathVariable("id") String id);
 }
 
 @Component

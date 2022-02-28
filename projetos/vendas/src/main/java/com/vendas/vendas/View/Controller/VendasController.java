@@ -34,7 +34,7 @@ public class VendasController {
 
         for (String id : vendaId) {
             try {
-                if (vendaFeignClient.obterPorId(id)) {
+                if (vendaFeignClient.obterPorId(id) == null) {
                     return new ResponseEntity<>("Produto Não encontrado.", HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
