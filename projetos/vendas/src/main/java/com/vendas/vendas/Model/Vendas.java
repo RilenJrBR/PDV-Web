@@ -11,14 +11,12 @@ public class Vendas {
     private String id;
     private List<String> produto;
     private int quantProdutos;
-    private float valorUn;
     private float valorTotal;
 
     
-    public Vendas(List<String> produto, int quantProdutos, float valorUn, float valorTotal) {
+    public Vendas(List<String> produto, int quantProdutos, float valorTotal) {
         this.produto= produto;
         this.quantProdutos = quantProdutos;
-        this.valorUn = valorUn;
         this.valorTotal = valorTotal;
 
     }
@@ -47,14 +45,6 @@ public class Vendas {
         this.quantProdutos = quantProdutos;
     }
 
-    public float getValorUn() {
-        return valorUn;
-    }
-
-    public void setValorUn(float valorUn) {
-        this.valorUn = valorUn;
-    }
-    
     public float getValorTotal() {
         return valorTotal;
     }

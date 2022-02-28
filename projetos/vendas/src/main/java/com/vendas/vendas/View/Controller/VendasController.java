@@ -2,9 +2,6 @@ package com.vendas.vendas.View.Controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.validation.Valid;
 
 import com.vendas.vendas.Model.Vendas;
 import com.vendas.vendas.Service.VendaService;
@@ -12,7 +9,6 @@ import com.vendas.vendas.Service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +34,8 @@ public class VendasController {
 
         for (String id : vendaId) {
             try {
-                if (vendaFeignClient.obterPorId(id) == null) {
-                    return new ResponseEntity<>("Não é possível validar os este produto.", HttpStatus.INTERNAL_SERVER_ERROR);
+                if (vendaFeignClient.obterPorId(id)) {
+                    return new ResponseEntity<>("Produto Não encontrado.", HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
             catch (FeignClientException e) {
