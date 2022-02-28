@@ -6,9 +6,11 @@ import java.util.Optional;
 import com.vendas.vendas.Model.Vendas;
 
 public interface VendaService{
+
     Vendas add(Vendas vendas);
     Optional <Vendas> get(String id);
     List<Vendas> obterTodasVendas();
+
 }
 
 

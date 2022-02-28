@@ -57,25 +57,23 @@ public class VendasController {
     }
 
     @GetMapping ("/{id}")
-    public ResponseEntity<Vendas> obterPorId(@PathVariable String id){
+    public ResponseEntity obterPorId(@PathVariable String id){
         Optional<Vendas> venda = servico.get(id);
         if (venda.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         
-        return new ResponseEntity<>(Vendas.from(venda.get()), HttpStatus.OK);
+        return new ResponseEntity<>(venda, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Vendas>> obterTodasVendas(@RequestBody Vendas dto){
+    public ResponseEntity<List<Vendas>> obterTodasVendas(){
         List<Vendas> venda = servico.obterTodasVendas();
 
-        List<VendasDTO> dtos = venda
+        if (venda.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        .stream()
-        .map(VendasDTO::from)
-        .collect(Collectors.toList());
-
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+        return new ResponseEntity<>(venda, HttpStatus.OK);
     }
 }
