@@ -1,5 +1,6 @@
 package com.vendas.vendas.Model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -10,12 +11,14 @@ public class Vendas {
     @Id
     private String id;
     private List<String> produto;
+    private String data;
     private int quantProdutos;
     private float valorTotal;
 
     
-    public Vendas(List<String> produto, int quantProdutos, float valorTotal) {
-        this.produto= produto;
+    public Vendas(List<String> produto, String data, int quantProdutos, float valorTotal) {
+        this.produto = produto;
+        this.data = data;
         this.quantProdutos = quantProdutos;
         this.valorTotal = valorTotal;
 
@@ -51,6 +54,17 @@ public class Vendas {
     
     public void setValorTotal(float valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String dataAtual) {
+        this.data = dataAtual;
+    }
+
+    public void setData(LocalDate dataAtual) {
     }  
     
 }

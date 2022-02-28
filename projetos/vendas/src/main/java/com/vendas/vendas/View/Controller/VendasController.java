@@ -1,5 +1,6 @@
 package com.vendas.vendas.View.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,8 @@ public class VendasController {
     @Autowired
     private VendaFeignClient vendaFeignClient;
 
+    private LocalDate dataAtual = LocalDate.now();
+
     @PostMapping
     public ResponseEntity<Object> post(@RequestBody Vendas venda) {
         List<String> vendaId = venda.getProduto();
@@ -48,7 +51,10 @@ public class VendasController {
             }
         }
 
+        venda.setData(dataAtual);
+        venda.setValorTotal(produto.getValor() * venda.getQuantProdutos());
         Vendas vendaEfetuado = servico.add(venda);
+        produto.setQuantEstoque(produto.getEstoque() - venda.getQuantProdutos());
         return new ResponseEntity<>(vendaEfetuado, HttpStatus.CREATED);
     }
 
