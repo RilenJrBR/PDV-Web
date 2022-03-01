@@ -23,3 +23,8 @@ A maior motivação para desenvolver esse projeto foi poder praticar tudo que no
 - MongoDB
 - Eureka Server
 - Gateway
+
+## Desenvolvedores
+
+- Rilen Eduardo Freitas
+- Erisvan Barboza
