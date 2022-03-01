@@ -52,9 +52,9 @@ public class VendasController {
         }
 
         venda.setData(dataAtual);
-        venda.setValorTotal(produto.getValor() * venda.getQuantProdutos());
+        
         Vendas vendaEfetuado = servico.add(venda);
-        produto.setQuantEstoque(produto.getEstoque() - venda.getQuantProdutos());
+        
         return new ResponseEntity<>(vendaEfetuado, HttpStatus.CREATED);
     }
 
