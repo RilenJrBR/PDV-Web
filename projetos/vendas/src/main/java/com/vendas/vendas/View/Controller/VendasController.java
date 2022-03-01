@@ -52,9 +52,7 @@ public class VendasController {
         }
 
         venda.setData(dataAtual);
-        
         Vendas vendaEfetuado = servico.add(venda);
-        
         return new ResponseEntity<>(vendaEfetuado, HttpStatus.CREATED);
     }
 
